@@ -1,0 +1,170 @@
+/* Base Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #333;
+}
+
+/* Navigation Bar */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #222;
+}
+
+.logo-container span {
+    color: #d8456b;
+    /* Peach logo color */
+    font-size: 30px;
+    margin-right: 8px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #555;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+nav ul li a:hover {
+    color: #d8456b;
+}
+
+/* Grid Layout */
+.car-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Car Card */
+.car-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.image-container {
+    position: relative;
+    height: 200px;
+    background-color: #f4f4f4;
+    /* Fallback color if image is missing */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.financing-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background-color: #2e8b7e;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.heart-icon {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    color: white;
+    font-size: 18px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.car-details {
+    padding: 15px 0;
+}
+
+.car-title {
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+    color: #222;
+}
+
+.car-specs {
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.car-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.car-price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #222;
+}
+
+.tag-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.locally-used-badge {
+    background-color: #f2f2f2;
+    color: #555;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.inspection-link {
+    font-size: 12px;
+    color: #d8456b;
+    text-decoration: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container { max-width: 90%; padding: 15px; }
+  .car-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; padding: 20px; }
+  header { flex-direction: column; align-items: flex-start; }
+  nav ul { flex-direction: column; gap: 10px; }
+  .cart-bell { font-size: 1.2rem; }
+}
