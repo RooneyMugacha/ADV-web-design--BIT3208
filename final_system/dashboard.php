@@ -1,12 +1,41 @@
 <?php
-// dashboard.php (public version)
-// No session or database required – show static placeholders
-$totalCars = 0;
-$totalUsers = 0;
-$newOrders = 0;
-$revenue = 0.00;
-$cars = [];
-?>
+// dashboard.php
+session_start();
+require_once 'db.php';
+
+// Protect page – ensure user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+}
+
+// Fetch some statistics (simple queries, adjust as needed)
+try {
+    // Total cars
+    $stmt = $pdo->query('SELECT COUNT(*) AS total FROM cars');
+    $totalCars = $stmt->fetchColumn();
+
+    // Total users
+    $stmt = $pdo->query('SELECT COUNT(*) AS total FROM users');
+    $totalUsers = $stmt->fetchColumn();
+
+    // New orders placeholder (you can replace with real query)
+    $newOrders = 5; // static for demo
+
+    // Revenue placeholder – sum of price column if exists
+    $stmt = $pdo->query('SELECT IFNULL(SUM(price),0) AS revenue FROM cars');
+    $revenue = $stmt->fetchColumn();
+
+    // Fetch a few car records for the grid (limit 8)
+    $stmt = $pdo->prepare('SELECT id, title, price, image_path FROM cars LIMIT 8');
+    $stmt->execute();
+    $cars = $stmt->fetchAll();
+} catch (Exception $e) {
+    // In case of DB errors, fall back to empty values
+    $totalCars = $totalUsers = $newOrders = 0;
+    $revenue = 0;
+    $cars = [];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
