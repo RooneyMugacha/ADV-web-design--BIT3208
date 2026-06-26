@@ -102,7 +102,10 @@ $cars = [
             <ul>
                 <li><a href="index.php">Shop</a></li>
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <li><a href="dashboard.php">Dashboard</a></li>
+                    <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin'] == 1): ?>
+                        <li><a href="dashboard.php">Dashboard</a></li>
+                        <li><a href="admin.php">Manage Cars</a></li>
+                    <?php endif; ?>
                     <li><a href="contact.php">Support</a></li>
                     <li><a href="logout.php">Logout</a></li>
                 <?php else: ?>

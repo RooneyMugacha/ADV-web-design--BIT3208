@@ -5,7 +5,7 @@ require_once 'db.php';
 
 // If user is already logged in, redirect to dashboard/contact page
 if (isset($_SESSION['user_id'])) {
-    header("Location: contact.php");
+    header("Location: index.php");
     exit();
 }
 
@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Please enter username/email and password.";
     } else {
         // Find user by username or email
-        $stmt = $pdo->prepare("SELECT id, username, password FROM users WHERE username = ? OR email = ?");
+        $stmt = $pdo->prepare("SELECT id, username, password, is_admin FROM users WHERE username = ? OR email = ?");
         $stmt->execute([$username_or_email, $username_or_email]);
         $user = $stmt->fetch();
 
@@ -28,9 +28,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Password is correct, start session
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['is_admin'] = $user['is_admin'];
             
-            // Redirect to protected page
-            header("Location: contact.php");
+            // Redirect based on role
+            if ($user['is_admin'] == 1) {
+                header("Location: dashboard.php");
+            } else {
+                header("Location: index.php");
+            }
             exit();
         } else {
             $error = "Invalid username or password.";
